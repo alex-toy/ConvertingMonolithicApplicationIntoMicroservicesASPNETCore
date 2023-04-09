@@ -1,12 +1,10 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderService
+namespace OrderService.Orders
 {
     public class OrderCreator : IOrderCreator
     {
@@ -32,7 +30,7 @@ namespace OrderService
                 transaction.Commit();
                 return id;
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 logger.LogError($"Error: {exc}");
                 transaction.Rollback();

@@ -1,4 +1,4 @@
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[Warehouse]    Script Date: 12/28/2020 10:45:36 AM ******/
@@ -23,7 +23,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[User]    Script Date: 12/28/2020 10:45:31 AM ******/
@@ -47,7 +47,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[Product]    Script Date: 12/28/2020 10:45:26 AM ******/
@@ -73,7 +73,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[OrderDetail]    Script Date: 12/28/2020 10:45:21 AM ******/
@@ -99,7 +99,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[Order]    Script Date: 12/28/2020 10:45:15 AM ******/
@@ -125,7 +125,7 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  Table [dbo].[Inventory]    Script Date: 12/28/2020 10:45:08 AM ******/
@@ -152,7 +152,7 @@ GO
 
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  StoredProcedure [dbo].[CREATE_ORDER]    Script Date: 12/28/2020 10:48:05 AM ******/
@@ -185,7 +185,7 @@ END
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  StoredProcedure [dbo].[CREATE_ORDER_DETAILS]    Script Date: 12/28/2020 10:48:17 AM ******/
@@ -220,7 +220,7 @@ END
 GO
 
 
-USE [Abby]
+USE [ECOMM]
 GO
 
 /****** Object:  StoredProcedure [dbo].[UPDATE_INVENTORY]    Script Date: 12/28/2020 10:48:28 AM ******/
@@ -246,6 +246,32 @@ BEGIN
 	SET NOCOUNT ON;
 
 	UPDATE [dbo].[Inventory] SET [Quantity] = @quantity WHERE [ProductId] = @productId
+
+END
+
+GO
+
+
+USE [ECOMM]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ADD_PRODUCT]
+	@productId int,
+	@Name varchar(50),
+	@Description varchar(50),
+	@type varchar(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [dbo].[Product]
+	([OrderId],[ProductId],[Quantity],[ProductName]) VALUES (@orderId, @productId, @quantity, @productName)
 
 END
 

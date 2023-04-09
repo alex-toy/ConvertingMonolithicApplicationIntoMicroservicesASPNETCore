@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace OrderService
+namespace OrderService.Orders
 {
     public class OrderDetailsProvider : IOrderDetailsProvider
     {

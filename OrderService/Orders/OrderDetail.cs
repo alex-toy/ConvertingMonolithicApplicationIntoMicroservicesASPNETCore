@@ -1,4 +1,4 @@
-﻿namespace OrderService
+﻿namespace OrderService.Orders
 {
     public class OrderDetail
     {

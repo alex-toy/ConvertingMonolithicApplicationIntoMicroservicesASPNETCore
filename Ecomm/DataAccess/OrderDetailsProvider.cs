@@ -12,8 +12,7 @@ namespace Ecomm.DataAccess
         private readonly IHttpClientFactory httpClientFactory;
         private readonly ILogger<OrderDetailsProvider> logger;
 
-        public OrderDetailsProvider(IHttpClientFactory httpClientFactory,
-            ILogger<OrderDetailsProvider> logger)
+        public OrderDetailsProvider(IHttpClientFactory httpClientFactory, ILogger<OrderDetailsProvider> logger)
         {
             this.httpClientFactory = httpClientFactory;
             this.logger = logger;
@@ -30,7 +29,6 @@ namespace Ecomm.DataAccess
             }
             catch (System.Exception exc)
             {
-                // Log the exception
                 logger.LogError($"Error getting order details {exc}");
                 return Array.Empty<OrderDetail>();
             }

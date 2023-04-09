@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 using Ecomm.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OrderService.Orders;
 using Plain.RabbitMQ;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OrderService.Controllers
 {

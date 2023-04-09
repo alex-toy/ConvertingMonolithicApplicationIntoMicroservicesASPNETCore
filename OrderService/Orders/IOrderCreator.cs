@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace OrderService
+namespace OrderService.Orders
 {
     public interface IOrderCreator
     {

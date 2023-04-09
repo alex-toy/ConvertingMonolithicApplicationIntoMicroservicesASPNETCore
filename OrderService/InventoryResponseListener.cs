@@ -1,6 +1,7 @@
 ﻿using Ecomm.Models;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using OrderService.Orders;
 using Plain.RabbitMQ;
 using System.Collections.Generic;
 using System.Threading;
