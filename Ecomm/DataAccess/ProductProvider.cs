@@ -17,7 +17,8 @@ namespace Ecomm.DataAccess
         public Product[] Get()
         {
             using var connection = new SqlConnection(_connectionString);
-            return connection.Query<Product>(@"SELECT Id, Name, Description, Type FROM Product")
+            const string query = @"SELECT Id, Name, Description, Type FROM Product";
+            return connection.Query<Product>(query)
                 .ToArray();
         }
     }
