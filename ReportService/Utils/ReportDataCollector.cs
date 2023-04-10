@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Plain.RabbitMQ;
+using ReportService.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ReportService
+namespace ReportService.Utils
 {
     public class ReportDataCollector : IHostedService
     {
@@ -47,7 +48,7 @@ namespace ReportService
             else
             {
                 var order = JsonConvert.DeserializeObject<Order>(message);
-                if(memoryReportStorage.Get().Any(r => r.ProductName == order.Name))
+                if (memoryReportStorage.Get().Any(r => r.ProductName == order.Name))
                 {
                     memoryReportStorage.Get().First(r => r.ProductName == order.Name).Count -= order.Quantity;
                 }

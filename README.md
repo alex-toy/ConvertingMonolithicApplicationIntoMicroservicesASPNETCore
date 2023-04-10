@@ -2,6 +2,16 @@
 
 Breaking out a microservice from an existing monolithic demo application
 
+## Order service
+
+### Install Packages
+```
+Dapper
+```
+
+
+
+
 ## Producer project
 
 1. Install **RabbitMQ Docker** image

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecomm.Models", "..\Ecomm.Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "..\OrderService\OrderService.csproj", "{2CEB1663-9E3F-4433-A87F-F76E07FEDE03}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportService", "..\ReportService\ReportService.csproj", "{37AA09D9-F251-452C-980C-706ABB1BD5A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2CEB1663-9E3F-4433-A87F-F76E07FEDE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CEB1663-9E3F-4433-A87F-F76E07FEDE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CEB1663-9E3F-4433-A87F-F76E07FEDE03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AA09D9-F251-452C-980C-706ABB1BD5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AA09D9-F251-452C-980C-706ABB1BD5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AA09D9-F251-452C-980C-706ABB1BD5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AA09D9-F251-452C-980C-706ABB1BD5A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

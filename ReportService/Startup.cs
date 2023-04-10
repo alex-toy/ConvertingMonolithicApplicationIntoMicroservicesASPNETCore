@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Plain.RabbitMQ;
 using RabbitMQ.Client;
+using ReportService.Utils;
 
 namespace ReportService
 {

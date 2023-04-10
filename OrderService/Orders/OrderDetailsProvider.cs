@@ -16,8 +16,10 @@ namespace OrderService.Orders
         public OrderDetail[] Get()
         {
             using var connection = new SqlConnection(_connectionString);
-            return connection.Query<OrderDetail>(@"SELECT o.UserName AS [User], od.ProductName AS Name, od.Quantity  FROM [Order] o
-                                            JOIN [OrderDetail] od on o.Id = od.OrderId")
+            string query = @"SELECT o.UserName AS [User], od.ProductName AS Name, od.Quantity  
+                             FROM [Order] o
+                             JOIN [OrderDetail] od on o.Id = od.OrderId";
+            return connection.Query<OrderDetail>(query)
                 .ToArray();
         }
     }

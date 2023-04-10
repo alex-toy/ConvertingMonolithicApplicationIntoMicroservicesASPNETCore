@@ -17,7 +17,8 @@ namespace Ecomm.DataAccess
         public Inventory[] Get()
         {
             using var connection = new SqlConnection(_connectionString);
-            return connection.Query<Inventory>(@"SELECT Id, Name, Quantity, ProductId FROM Inventory").ToArray();
+            const string query = @"SELECT Id, Name, Quantity, ProductId FROM Inventory";
+            return connection.Query<Inventory>(query).ToArray();
         }
     }
 }

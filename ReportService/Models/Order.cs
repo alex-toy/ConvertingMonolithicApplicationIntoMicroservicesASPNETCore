@@ -1,4 +1,4 @@
-﻿namespace ReportService
+﻿namespace ReportService.Models
 {
     public class Order
     {

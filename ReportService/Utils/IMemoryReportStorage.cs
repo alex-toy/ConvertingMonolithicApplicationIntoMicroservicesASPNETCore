@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ReportService.Models;
+using System.Collections.Generic;
 
-namespace ReportService
+namespace ReportService.Utils
 {
     public interface IMemoryReportStorage
     {
