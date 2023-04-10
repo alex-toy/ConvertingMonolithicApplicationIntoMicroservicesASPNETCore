@@ -1,4 +1,6 @@
-using Ecomm.DataAccess;
+using Ecomm.DataAccess.Inventories;
+using Ecomm.DataAccess.OrderDetails;
+using Ecomm.DataAccess.Products;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,25 +26,24 @@ namespace Ecomm
 
             var connectionString = Configuration["ConnectionString"];
 
-            services.AddSingleton<IOrderDetailsProvider, OrderDetailsProvider>();
-            services.AddSingleton<IInventoryProvider>(new InventoryProvider(connectionString));
+            services.AddSingleton<IOrderDetailsDb, OrderDetailsDb>();
+            services.AddSingleton<IInventoryDb>(new InventoryDb(connectionString));
             services.AddSingleton<IProductProvider>(new ProductProvider(connectionString));
-            services.AddSingleton<IInventoryUpdator>(new InventoryUpdator(connectionString));
+            services.AddSingleton<IInventoryDb>(new InventoryDb(connectionString));
 
-            services.AddHttpClient("order", config =>
-                config.BaseAddress = new System.Uri("https://localhost:5001/"));
+            services.AddHttpClient("order", config => config.BaseAddress = new System.Uri("https://localhost:5001/"));
 
             services.AddSingleton<IConnectionProvider>(new ConnectionProvider("amqp://guest:guest@localhost:5672"));
-            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(),
-                    "inventory_exchange",
-                    ExchangeType.Topic));
+
+            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(), "inventory_exchange", ExchangeType.Topic));
+            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(), "report_exchange", ExchangeType.Topic));
+
             services.AddSingleton<ISubscriber>(x => new Subscriber(x.GetService<IConnectionProvider>(),
                 "order_exchange",
                 "order_response",
                 "order.created",
                 ExchangeType.Topic));
-
-            services.AddHostedService<OrderCreatedListener>();
+            services.AddHostedService<OrderListener>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo

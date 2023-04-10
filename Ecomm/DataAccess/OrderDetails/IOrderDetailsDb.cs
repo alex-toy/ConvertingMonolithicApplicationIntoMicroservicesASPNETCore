@@ -1,9 +1,9 @@
 ﻿using Ecomm.Models;
 using System.Threading.Tasks;
 
-namespace Ecomm.DataAccess
+namespace Ecomm.DataAccess.OrderDetails
 {
-    public interface IOrderDetailsProvider
+    public interface IOrderDetailsDb
     {
         Task<OrderDetail[]> Get();
     }

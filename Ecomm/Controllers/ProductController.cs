@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Ecomm.DataAccess;
+using Ecomm.DataAccess.Products;
 using Ecomm.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,12 +14,12 @@ namespace Ecomm.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductProvider _productProvider;
-        private readonly IPublisher publisher;
+        private readonly IPublisher _publisher;
 
         public ProductController(IProductProvider productProvider, IPublisher publisher)
         {
             _productProvider = productProvider;
-            this.publisher = publisher;
+            _publisher = publisher;
         }
 
         // GET: api/<ProductController>
@@ -40,7 +40,9 @@ namespace Ecomm.Controllers
         [HttpPost]
         public void Post([FromBody] Product product)
         {
-            publisher.Publish(JsonConvert.SerializeObject(product), "report.product", null);
+            string message = JsonConvert.SerializeObject(product);
+            const string RoutingKey = "report.product";
+            _publisher.Publish(message, RoutingKey, null);
         }
 
         // PUT api/<ProductController>/5

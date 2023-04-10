@@ -7,34 +7,34 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OrderService
+namespace OrderService.Listeners
 {
     public class InventoryResponseListener : IHostedService
     {
-        private readonly ISubscriber subscriber;
-        private readonly IOrderDeletor orderDeletor;
+        private readonly ISubscriber _subscriber;
+        private readonly IOrderDb _orderDb;
 
-        public InventoryResponseListener(ISubscriber subscriber, IOrderDeletor orderDeletor)
+        public InventoryResponseListener(ISubscriber subscriber, IOrderDb orderDb)
         {
-            this.subscriber = subscriber;
-            this.orderDeletor = orderDeletor;
+            _subscriber = subscriber;
+            _orderDb = orderDb;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            subscriber.Subscribe(Subscribe);
+            _subscriber.Subscribe(HandleInventoryResponse);
             return Task.CompletedTask;
         }
 
-        private bool Subscribe(string message, IDictionary<string, object> header)
+        private bool HandleInventoryResponse(string message, IDictionary<string, object> header)
         {
             var response = JsonConvert.DeserializeObject<InventoryResponse>(message);
             if (!response.IsSuccess)
             {
-                orderDeletor.Delete(response.OrderId).GetAwaiter().GetResult();
+                _orderDb.Delete(response.OrderId).GetAwaiter().GetResult();
             }
             return true;
-        } 
+        }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OrderService.Listeners;
 using OrderService.Orders;
 using Plain.RabbitMQ;
 using RabbitMQ.Client;
@@ -32,20 +33,19 @@ namespace OrderService
                 });
             });
             var connectionString = Configuration["ConnectionString"];
-            services.AddSingleton<IOrderDetailsProvider>(new OrderDetailsProvider(connectionString));
-            services.AddSingleton<IOrderCreator>(x => new OrderCreator(connectionString, x.GetService<ILogger<OrderCreator>>()));
-            services.AddSingleton<IOrderDeletor>(new OrderDeletor(connectionString));
+            services.AddSingleton<IOrderDetailsDb>(new OrderDetailsDb(connectionString));
+            services.AddSingleton<IOrderDb>(x => new OrderDb(connectionString, x.GetService<ILogger<OrderDb>>()));
 
             services.AddSingleton<IConnectionProvider>(new ConnectionProvider("amqp://guest:guest@localhost:5672"));
-            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(),
-                    "order_exchange",
-                    ExchangeType.Topic));
+
+            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(), "order_exchange", ExchangeType.Topic));
+            services.AddSingleton<IPublisher>(x => new Publisher(x.GetService<IConnectionProvider>(), "report_exchange", ExchangeType.Topic));
+
             services.AddSingleton<ISubscriber>(x => new Subscriber(x.GetService<IConnectionProvider>(),
                 "inventory_exchange",
                 "inventory_response",
                 "inventory.response",
                 ExchangeType.Topic));
-
             services.AddHostedService<InventoryResponseListener>();
         }
 

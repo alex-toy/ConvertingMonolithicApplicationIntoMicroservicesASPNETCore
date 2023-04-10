@@ -1,14 +1,15 @@
 ﻿using Dapper;
+using OrderService.Models;
 using System.Data.SqlClient;
 using System.Linq;
 
 namespace OrderService.Orders
 {
-    public class OrderDetailsProvider : IOrderDetailsProvider
+    public class OrderDetailsDb : IOrderDetailsDb
     {
         private readonly string _connectionString;
 
-        public OrderDetailsProvider(string connectionString)
+        public OrderDetailsDb(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -19,8 +20,7 @@ namespace OrderService.Orders
             string query = @"SELECT o.UserName AS [User], od.ProductName AS Name, od.Quantity  
                              FROM [Order] o
                              JOIN [OrderDetail] od on o.Id = od.OrderId";
-            return connection.Query<OrderDetail>(query)
-                .ToArray();
+            return connection.Query<OrderDetail>(query).ToArray();
         }
     }
 }

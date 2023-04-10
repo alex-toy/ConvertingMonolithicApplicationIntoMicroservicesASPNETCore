@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Ecomm.DataAccess;
+using Ecomm.DataAccess.Inventories;
 using Ecomm.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +11,9 @@ namespace Ecomm.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        private readonly IInventoryProvider _inventoryProvider;
+        private readonly IInventoryDb _inventoryProvider;
 
-        public InventoryController(IInventoryProvider inventoryProvider)
+        public InventoryController(IInventoryDb inventoryProvider)
         {
             _inventoryProvider = inventoryProvider;
         }

@@ -3,7 +3,7 @@ using Ecomm.Models;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace Ecomm.DataAccess
+namespace Ecomm.DataAccess.Products
 {
     public class ProductProvider : IProductProvider
     {

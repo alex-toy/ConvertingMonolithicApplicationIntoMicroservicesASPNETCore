@@ -5,14 +5,14 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Ecomm.DataAccess
+namespace Ecomm.DataAccess.OrderDetails
 {
-    public class OrderDetailsProvider : IOrderDetailsProvider
+    public class OrderDetailsDb : IOrderDetailsDb
     {
         private readonly IHttpClientFactory httpClientFactory;
-        private readonly ILogger<OrderDetailsProvider> logger;
+        private readonly ILogger<OrderDetailsDb> logger;
 
-        public OrderDetailsProvider(IHttpClientFactory httpClientFactory, ILogger<OrderDetailsProvider> logger)
+        public OrderDetailsDb(IHttpClientFactory httpClientFactory, ILogger<OrderDetailsDb> logger)
         {
             this.httpClientFactory = httpClientFactory;
             this.logger = logger;
@@ -27,7 +27,7 @@ namespace Ecomm.DataAccess
                 var data = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<OrderDetail[]>(data);
             }
-            catch (System.Exception exc)
+            catch (Exception exc)
             {
                 logger.LogError($"Error getting order details {exc}");
                 return Array.Empty<OrderDetail>();

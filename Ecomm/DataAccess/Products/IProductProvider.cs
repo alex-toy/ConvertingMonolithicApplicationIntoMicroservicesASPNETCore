@@ -1,6 +1,6 @@
 ﻿using Ecomm.Models;
 
-namespace Ecomm.DataAccess
+namespace Ecomm.DataAccess.Products
 {
     public interface IProductProvider
     {
